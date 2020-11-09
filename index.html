@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <script language="javascript">
+  function ikTest(pole) {
+    var isikukood = pole.value;
+
+    var _maxdays = Array(31,28,31,30,31,30,31,31,30,31,30,31);
+    var _years = Array(0,1800,1800,1900,1900,2000,2000);
+    var _visday = Array(0,1,0,0,0,0,0,0,0,0,0,0);
+    var _sex = Array("","мужской","женский","мужской","женский","мужской","женский");
+
+    var _isikukood = Array(isikukood.substr(0,1), isikukood.substr(1, 2), isikukood.substr(3,2), isikukood.substr(5,2),
+                           isikukood.substr(7,3), isikukood.substr(10,1));
+
+    var result = "";
+
+    var isCorrectFormOfSym = true;
+    for(nextSym = 0; nextSym < isikukood.length; nextSym++) {
+      if(Number.isInteger(isikukood.charAt(nextSym)) == false) {
+        isCorrectFormOfSym = false;
+        break;
+      }
+    }
+
+    var isCorrectFormOfSex = false;
+    for (nextSym = 0; nextSym < _sex.length - 1; nextSym++) {
+      var correctSyms = "123456";
+      if(_isikukood[0] == correctSyms.charAt(nextSym)) {
+        isCorrectFormOfSex = true;
+        break;
+      }
+    }
+
+    if(isCorrectFormOfSym == false) {
+      result = "incorrect symbols in form";
+    } else if(isikukood.length !== 11) {
+      result = "a count of symbols in input form should be equal 11";
+    } else if(isCorrectFormOfSex == false) {
+      result = "incorrect num identifier of sex "
+    }
+
+    document.getElementById("_result").innerHTML = result;
+  }
+  </script>
+</head>
+<body>
+  <input type="text" name="" value="" onkeyup="ikTest(this)">
+  <p id="_result"></p>
+</body>
+</html>
